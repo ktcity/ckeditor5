@@ -32,6 +32,22 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 
+// Add new
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
+import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
+import Title from '@ckeditor/ckeditor5-heading/src/title';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
+import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows.js';
+import SpecialCharactersCurrency from '@ckeditor/ckeditor5-special-characters/src/specialcharacterscurrency.js';
+import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials.js';
+import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin.js';
+import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
+import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
+
 import '../theme/theme.css';
 
 export default class BalloonEditor extends BalloonEditorBase {}
@@ -62,7 +78,21 @@ BalloonEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+	Underline,
+	WordCount,
+	Autosave,
+	Title,
+	Alignment,
+	TextTransformation,
+	SpecialCharacters,
+	SpecialCharactersArrows,
+	SpecialCharactersCurrency,
+	SpecialCharactersEssentials,
+	SpecialCharactersLatin,
+	SpecialCharactersText,
+	TableProperties,
+	TableCellProperties,
+	HtmlEmbed,
 ];
 
 // Editor configuration.
@@ -82,30 +112,84 @@ BalloonEditor.defaultConfig = {
 		'mediaEmbed',
 		'|',
 		'undo',
-		'redo'
+		'redo',
 	],
 	toolbar: {
-		items: [
-			'bold',
-			'italic',
-			'link'
-		]
+		items: ['bold', 'italic', 'underline', 'link', 'alignment'],
 	},
 	image: {
 		toolbar: [
 			'imageStyle:full',
 			'imageStyle:side',
 			'|',
-			'imageTextAlternative'
-		]
+			'imageTextAlternative',
+		],
+	},
+	link: {
+		decorators: [
+			{
+				mode: 'manual',
+				label: 'Open in a new tab',
+				defaultValue: true,
+				attributes: {
+					target: '_blank',
+					rel: 'noopener noreferrer',
+				},
+			},
+			{
+				mode: 'manual',
+				defaultValue: false,
+				label: 'NoFollow',
+				attributes: {
+					rel: 'nofollow',
+				},
+			},
+		],
+	},
+	image: {
+		toolbar: [
+			'imageStyle:side',
+			'imageStyle:full',
+			'imageStyle:alignLeft',
+			'imageStyle:alignCenter',
+			'|',
+			'imageTextAlternative',
+		],
+		styles: ['side', 'full', 'alignLeft', 'alignCenter'],
 	},
 	table: {
 		contentToolbar: [
 			'tableColumn',
 			'tableRow',
-			'mergeTableCells'
-		]
+			'mergeTableCells',
+			'tableCellProperties',
+			'tableProperties',
+		],
+	},
+	ckfinder: {
+		// Open the file manager in the pop-up window.
+		openerMethod: 'popup',
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+	autosave: {
+		save(editor) {
+			console.log('editor.getData()', editor.getData());
+			// The saveData() function must return a promise
+			// which should be resolved when the data is successfully saved.
+			// return saveData(editor.getData());
+		},
+	},
+	mediaEmbed: {
+		extraProviders: [
+			{
+				name: 'tiktok',
+				url: /^https?:\/\/www.?tiktok\.com\/(@.*)\/video\/([0-9]*)\/?/,
+				html: (match) => {
+					return `<blockquote class="tiktok-embed" cite="${match[0]}" data-video-id="${match[2]}" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="${match[1]}" href="https://www.tiktok.com/${match[1]}">${match[1]}</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>`;
+				},
+			},
+		],
+	},
+	// This value must be kept in sync with the language defined in webpack.config.js.
+	language: 'en',
 };

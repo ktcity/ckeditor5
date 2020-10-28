@@ -7,32 +7,34 @@
 
 'use strict';
 
-const fs = require( 'fs' );
-const path = require( 'path' );
+const fs = require('fs');
+const path = require('path');
 
-const dllPackages = fs.readdirSync( path.join( __dirname, 'src' ) ).map( directory => directory.replace( /\.js$/, '' ) );
+const dllPackages = fs
+	.readdirSync(path.join(__dirname, 'src'))
+	.map((directory) => directory.replace(/\.js$/, ''));
 
 module.exports = {
 	extends: 'ckeditor5',
 	settings: {
-		dllPackages
+		dllPackages,
 	},
 	rules: {
-		'ckeditor5-rules/ckeditor-imports': 'error'
+		'ckeditor5-rules/ckeditor-imports': 'error',
 	},
 	overrides: [
 		{
-			files: [ '**/tests/**/*.js' ],
+			files: ['**/tests/**/*.js'],
 			rules: {
 				'no-unused-expressions': 'off',
-				'ckeditor5-rules/ckeditor-imports': 'off'
-			}
+				'ckeditor5-rules/ckeditor-imports': 'off',
+			},
 		},
 		{
-			files: [ '**/docs/**/*.js' ],
+			files: ['**/docs/**/*.js'],
 			rules: {
-				'ckeditor5-rules/ckeditor-imports': 'off'
-			}
-		}
-	]
+				'ckeditor5-rules/ckeditor-imports': 'off',
+			},
+		},
+	],
 };
