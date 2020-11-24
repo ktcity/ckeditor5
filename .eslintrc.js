@@ -17,24 +17,24 @@ const dllPackages = fs
 module.exports = {
 	extends: 'ckeditor5',
 	settings: {
-		dllPackages,
+		dllPackages
 	},
 	rules: {
-		'ckeditor5-rules/ckeditor-imports': 'error',
+		'ckeditor5-rules/ckeditor-imports': 'error'
 	},
 	overrides: [
 		{
 			files: ['**/tests/**/*.js'],
 			rules: {
 				'no-unused-expressions': 'off',
-				'ckeditor5-rules/ckeditor-imports': 'off',
-			},
+				'ckeditor5-rules/ckeditor-imports': 'off'
+			}
 		},
 		{
 			files: ['**/docs/**/*.js'],
 			rules: {
-				'ckeditor5-rules/ckeditor-imports': 'off',
-			},
-		},
-	],
+				'ckeditor5-rules/ckeditor-imports': 'off'
+			}
+		}
+	]
 };
