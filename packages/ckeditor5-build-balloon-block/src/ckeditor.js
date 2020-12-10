@@ -3,52 +3,51 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
+import '../theme/theme.css';
+
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
 // The editor creator to use.
 import BalloonEditorBase from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
-
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import BlockToolbar from '@ckeditor/ckeditor5-ui/src/toolbar/block/blocktoolbar';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
+import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
 import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
+import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import Table from '@ckeditor/ckeditor5-table/src/table';
-import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
-
-// Add new
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
-import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
-import Title from '@ckeditor/ckeditor5-heading/src/title';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters';
 import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows.js';
 import SpecialCharactersCurrency from '@ckeditor/ckeditor5-special-characters/src/specialcharacterscurrency.js';
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials.js';
 import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin.js';
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
-import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
-import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
-
-import '../theme/theme.css';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+import Title from '@ckeditor/ckeditor5-heading/src/title';
+// Add new
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
+import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
+import sanitize from 'sanitize-html';
 
 export default class BalloonEditor extends BalloonEditorBase {}
 
@@ -93,6 +92,7 @@ BalloonEditor.builtinPlugins = [
 	TableProperties,
 	TableCellProperties,
 	HtmlEmbed,
+	Mention
 ];
 
 // Editor configuration.
@@ -108,22 +108,21 @@ BalloonEditor.defaultConfig = {
 		'|',
 		'uploadImage',
 		'blockQuote',
-		'insertTable',
 		'mediaEmbed',
 		'|',
 		'undo',
-		'redo',
+		'redo'
 	],
 	toolbar: {
-		items: ['bold', 'italic', 'underline', 'link', 'alignment'],
+		items: [ 'bold', 'italic', 'underline', 'link', 'alignment' ]
 	},
 	image: {
 		toolbar: [
 			'imageStyle:full',
 			'imageStyle:side',
 			'|',
-			'imageTextAlternative',
-		],
+			'imageTextAlternative'
+		]
 	},
 	link: {
 		decorators: [
@@ -133,18 +132,18 @@ BalloonEditor.defaultConfig = {
 				defaultValue: true,
 				attributes: {
 					target: '_blank',
-					rel: 'noopener noreferrer',
-				},
+					rel: 'noopener noreferrer'
+				}
 			},
 			{
 				mode: 'manual',
 				defaultValue: false,
 				label: 'NoFollow',
 				attributes: {
-					rel: 'nofollow',
-				},
-			},
-		],
+					rel: 'nofollow'
+				}
+			}
+		]
 	},
 	image: {
 		toolbar: [
@@ -153,43 +152,56 @@ BalloonEditor.defaultConfig = {
 			'imageStyle:alignLeft',
 			'imageStyle:alignCenter',
 			'|',
-			'imageTextAlternative',
+			'imageTextAlternative'
 		],
-		styles: ['side', 'full', 'alignLeft', 'alignCenter'],
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells',
-			'tableCellProperties',
-			'tableProperties',
-		],
+		styles: [ 'side', 'full', 'alignLeft', 'alignCenter' ]
 	},
 	ckfinder: {
 		// Open the file manager in the pop-up window.
-		openerMethod: 'popup',
+		openerMethod: 'popup'
+	},
+	htmlEmbed: {
+		showPreviews: false,
+		sanitizeHtml( inputHtml ) {
+			// Strip unsafe elements and attributes, e.g.:
+			// the `<script>` elements and `on*` attributes.
+			const outputHtml = sanitize( inputHtml );
+
+			return {
+				html: outputHtml
+				// true or false depending on whether the sanitizer stripped anything.
+			};
+		}
+	},
+	mention: {
+		feeds: [
+			{
+				marker: '@',
+				feed: [ '@Barney', '@Lily', '@Marshall', '@Robin', '@Ted' ],
+				minimumCharacters: 1
+			}
+		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	autosave: {
-		save(editor) {
-			console.log('editor.getData()', editor.getData());
+		save( editor ) {
+			console.log( 'editor.getData()', editor.getData() );
 			// The saveData() function must return a promise
 			// which should be resolved when the data is successfully saved.
 			// return saveData(editor.getData());
-		},
+		}
 	},
 	mediaEmbed: {
 		extraProviders: [
 			{
 				name: 'tiktok',
 				url: /^https?:\/\/www.?tiktok\.com\/(@.*)\/video\/([0-9]*)\/?/,
-				html: (match) => {
-					return `<blockquote class="tiktok-embed" cite="${match[0]}" data-video-id="${match[2]}" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="${match[1]}" href="https://www.tiktok.com/${match[1]}">${match[1]}</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>`;
-				},
-			},
-		],
+				html: match => {
+					return `<blockquote class="tiktok-embed" cite="${ match[ 0 ] }" data-video-id="${ match[ 2 ] }" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="${ match[ 1 ] }" href="https://www.tiktok.com/${ match[ 1 ] }">${ match[ 1 ] }</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>`;
+				}
+			}
+		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en',
+	language: 'en'
 };
