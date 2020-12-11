@@ -107,6 +107,19 @@ Below there is a full list of content styles used by the editor features. You ca
 /* ckeditor5-font/theme/fontsize.css */
 .ck-content .text-huge {
 	font-size: 1.8em;
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized {
+	max-width: 100%;
+	display: block;
+	box-sizing: border-box;
+}
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized img {
+	width: 100%;
+}
+/* ckeditor5-image/theme/imageresize.css */
+.ck-content .image.image_resized > figcaption {
+	display: block;
 }
 /* ckeditor5-image/theme/imagestyle.css */
 .ck-content .image-style-side {
@@ -193,6 +206,35 @@ Below there is a full list of content styles used by the editor features. You ca
 	clear: both;
 	text-align: center;
 	margin: 1em auto;
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-yellow {
+	background-color: var(--ck-highlight-marker-yellow);
+}
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-green {
+	background-color: var(--ck-highlight-marker-green);
+}
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-pink {
+	background-color: var(--ck-highlight-marker-pink);
+}
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .marker-blue {
+	background-color: var(--ck-highlight-marker-blue);
+}
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .pen-red {
+	color: var(--ck-highlight-pen-red);
+	background-color: transparent;
+}
+/* ckeditor5-highlight/theme/highlight.css */
+.ck-content .pen-green {
+	color: var(--ck-highlight-pen-green);
+	background-color: transparent;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-tiny {
+	font-size: .7em;
 }
 /* ckeditor5-image/theme/image.css */
 .ck-content .image img {
@@ -368,6 +410,39 @@ Below there is a full list of content styles used by the editor features. You ca
 /* ckeditor5-list/theme/todolist.css */
 .ck-content .todo-list .todo-list__label .todo-list__label__description {
 	vertical-align: middle;
+}
+/* ckeditor5-html-embed/theme/htmlembed.css */
+.ck-content .raw-html-embed {
+	margin: 1em auto;
+	min-width: 15em;
+	font-style: normal;
+}
+/* ckeditor5-horizontal-line/theme/horizontalline.css */
+.ck-content hr {
+	margin: 15px 0;
+	height: 4px;
+	background: hsl(0, 0%, 87%);
+	border: 0;
+}
+/* ckeditor5-code-block/theme/codeblock.css */
+.ck-content pre {
+	padding: 1em;
+	color: hsl(0, 0%, 20.8%);
+	background: hsla(0, 0%, 78%, 0.3);
+	border: 1px solid hsl(0, 0%, 77%);
+	border-radius: 2px;
+	text-align: left;
+	direction: ltr;
+	tab-size: 4;
+	white-space: pre-wrap;
+	font-style: normal;
+	min-width: 200px;
+}
+/* ckeditor5-code-block/theme/codeblock.css */
+.ck-content pre code {
+	background: unset;
+	padding: 0;
+	border-radius: 0;
 }
 /* ckeditor5-mention/theme/mention.css */
 .ck-content .mention {
