@@ -105,7 +105,6 @@ BalloonEditor.builtinPlugins = [
 // Editor configuration.
 BalloonEditor.defaultConfig = {
 	blockToolbar: [
-		'paragraph',
 		'heading2',
 		'heading3',
 		'heading4',
@@ -150,7 +149,7 @@ BalloonEditor.defaultConfig = {
 		]
 	},
 	toolbar: {
-		items: [ 'italic', 'underline', 'link', 'alignment' ]
+		items: [ 'paragraph', 'heading2', 'heading3', 'heading4', '|', 'bold', 'italic', 'underline', 'link', '|', 'alignment' ]
 	},
 	image: {
 		toolbar: [

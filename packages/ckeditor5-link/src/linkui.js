@@ -169,7 +169,9 @@ export default class LinkUI extends Plugin {
 
 		// Execute link command after clicking the "Save" button.
 		this.listenTo( formView, 'submit', () => {
-			const { value } = formView.urlInputView.fieldView.element;
+			const {
+				value
+			} = formView.urlInputView.fieldView.element;
 			const parsedUrl = addLinkProtocolIfApplicable( value, defaultProtocol );
 			editor.execute( 'link', parsedUrl, formView.getDecoratorSwitchesState() );
 			this._closeFormView();
@@ -219,6 +221,7 @@ export default class LinkUI extends Plugin {
 			button.keystroke = LINK_KEYSTROKE;
 			button.tooltip = true;
 			button.isToggleable = true;
+			button.class = 'icon-white custom-icon-link';
 
 			// Bind button to the command.
 			button.bind( 'isEnabled' ).to( linkCommand, 'isEnabled' );
@@ -603,7 +606,9 @@ export default class LinkUI extends Plugin {
 				view.domConverter.viewRangeToDom( range );
 		}
 
-		return { target };
+		return {
+			target
+		};
 	}
 
 	/**
@@ -657,7 +662,9 @@ export default class LinkUI extends Plugin {
 			const range = model.document.selection.getFirstRange();
 
 			if ( model.markers.has( VISUAL_SELECTION_MARKER_NAME ) ) {
-				writer.updateMarker( VISUAL_SELECTION_MARKER_NAME, { range } );
+				writer.updateMarker( VISUAL_SELECTION_MARKER_NAME, {
+					range
+				} );
 			} else {
 				if ( range.start.isAtEnd ) {
 					const startPosition = range.start.getLastMatchingPosition(
