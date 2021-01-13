@@ -7,8 +7,13 @@
  * @module image/imagestyle/utils
  */
 
-import { logWarning } from 'ckeditor5/src/utils';
-import { icons } from 'ckeditor5/src/core';
+import fullWidthIcon from '@ckeditor/ckeditor5-core/theme/icons/object-full-width.svg';
+import leftIcon from '@ckeditor/ckeditor5-core/theme/icons/object-left.svg';
+import centerIcon from '@ckeditor/ckeditor5-core/theme/icons/object-center.svg';
+import rightIcon from '@ckeditor/ckeditor5-core/theme/icons/object-right.svg';
+import wideIcon from '@ckeditor/ckeditor5-core/theme/icons/object-wide.svg';
+import fulloverIcon from '@ckeditor/ckeditor5-core/theme/icons/object-full-over.svg';
+import { logWarning } from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
 
 /**
  * Default image styles provided by the plugin that can be referred in the
@@ -66,7 +71,24 @@ const defaultStyles = {
 		title: 'Right aligned image',
 		icon: icons.objectRight,
 		className: 'image-style-align-right'
+	},
+
+	wide: {
+		name: 'wide',
+		title: 'Wide image',
+		// title: 'Wide image',
+		icon: wideIcon,
+		className: 'image-style-over over'
+	},
+
+	fullOver: {
+		name: 'fullOver',
+		title: 'Over full image',
+		// title: 'Full Over image',
+		icon: fulloverIcon,
+		className: 'image-style-over-full over-full'
 	}
+
 };
 
 /**
@@ -78,10 +100,12 @@ const defaultStyles = {
  * @member {Object.<String, String>}
  */
 const defaultIcons = {
-	full: icons.objectFullWidth,
-	left: icons.objectLeft,
-	right: icons.objectRight,
-	center: icons.objectCenter
+	full: fullWidthIcon,
+	left: leftIcon,
+	right: rightIcon,
+	center: centerIcon,
+	wide: wideIcon,
+	fullOver: fulloverIcon
 };
 
 /**

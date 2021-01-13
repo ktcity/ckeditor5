@@ -167,9 +167,17 @@ BalloonEditor.defaultConfig = {
 	image: {
 		toolbar: [
 			'imageStyle:full',
-			'imageStyle:side',
+			'imageStyle:alignLeft',
+			'imageStyle:wide',
+			'imageStyle:fullOver',
 			'|',
 			'imageTextAlternative'
+		],
+		styles: [
+			'full',
+			'alignLeft',
+			'wide',
+			'fullOver'
 		]
 	},
 	link: {

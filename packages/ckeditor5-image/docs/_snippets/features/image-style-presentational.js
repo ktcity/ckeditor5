@@ -14,7 +14,9 @@ ClassicEditor
 			styles: [
 				'alignLeft',
 				'alignCenter',
-				'alignRight'
+				'alignRight',
+				'wide',
+				'fullOver'
 			],
 			resizeOptions: [
 				{
@@ -37,6 +39,8 @@ ClassicEditor
 				'imageStyle:alignLeft',
 				'imageStyle:alignCenter',
 				'imageStyle:alignRight',
+				'imageStyle:wide',
+				'imageStyle:fullOver',
 				'|',
 				'resizeImage',
 				'|',

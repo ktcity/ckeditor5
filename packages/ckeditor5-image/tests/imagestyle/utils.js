@@ -9,6 +9,8 @@ import fullWidthIcon from '@ckeditor/ckeditor5-core/theme/icons/object-full-widt
 import leftIcon from '@ckeditor/ckeditor5-core/theme/icons/object-left.svg';
 import centerIcon from '@ckeditor/ckeditor5-core/theme/icons/object-center.svg';
 import rightIcon from '@ckeditor/ckeditor5-core/theme/icons/object-right.svg';
+import wideIcon from '@ckeditor/ckeditor5-core/theme/icons/object-wide.svg';
+import fulloverIcon from '@ckeditor/ckeditor5-core/theme/icons/object-full-over.svg';
 
 import testUtils from '@ckeditor/ckeditor5-core/tests/_utils/utils';
 import { normalizeImageStyles } from '../../src/imagestyle/utils';
@@ -96,6 +98,20 @@ describe( 'ImageStyle utils', () => {
 					title: 'Right aligned image',
 					icon: rightIcon,
 					className: 'image-style-align-right'
+				} ] );
+
+				expect( normalizeImageStyles( [ 'wide' ] ) ).to.deep.equal( [ {
+					name: 'wide',
+					title: 'Wide image',
+					icon: wideIcon,
+					className: 'image-style-over over'
+				} ] );
+
+				expect( normalizeImageStyles( [ 'fullOver' ] ) ).to.deep.equal( [ {
+					name: 'fullOver',
+					title: 'Full Over image',
+					icon: fulloverIcon,
+					className: 'image-style-over-full over-full'
 				} ] );
 			} );
 
