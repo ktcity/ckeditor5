@@ -123,33 +123,46 @@ BalloonEditor.defaultConfig = {
 		'redo'
 	],
 	heading: {
-		options: [ {
-			model: 'paragraph',
-			title: 'Paragraph',
-			class: 'ck-heading_paragraph'
-		},
-		{
-			model: 'heading2',
-			view: 'h2',
-			title: 'Heading 2',
-			class: 'ck-heading_heading2'
-		},
-		{
-			model: 'heading3',
-			view: 'h3',
-			title: 'Heading 3',
-			class: 'ck-heading_heading3'
-		},
-		{
-			model: 'heading4',
-			view: 'h4',
-			title: 'Heading 4',
-			class: 'ck-heading_heading4'
-		}
+		options: [
+			{
+				model: 'paragraph',
+				title: 'Paragraph',
+				class: 'ck-heading_paragraph'
+			},
+			{
+				model: 'heading2',
+				view: 'h2',
+				title: 'Heading 2',
+				class: 'ck-heading_heading2'
+			},
+			{
+				model: 'heading3',
+				view: 'h3',
+				title: 'Heading 3',
+				class: 'ck-heading_heading3'
+			},
+			{
+				model: 'heading4',
+				view: 'h4',
+				title: 'Heading 4',
+				class: 'ck-heading_heading4'
+			}
 		]
 	},
 	toolbar: {
-		items: [ 'paragraph', 'heading2', 'heading3', 'heading4', '|', 'bold', 'italic', 'underline', 'link', '|', 'alignment' ]
+		items: [
+			'paragraph',
+			'heading2',
+			'heading3',
+			'heading4',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'link',
+			'|',
+			'alignment'
+		]
 	},
 	image: {
 		toolbar: [
@@ -161,13 +174,23 @@ BalloonEditor.defaultConfig = {
 	},
 	link: {
 		protocol: 'http://',
-		decorators: [ {
-			mode: 'manual',
-			label: 'Open in a new tab',
-			defaultValue: true,
-			attributes: {
-				target: '_blank',
-				rel: 'noopener noreferrer'
+		decorators: [
+			{
+				mode: 'manual',
+				label: 'Open in a new tab',
+				defaultValue: true,
+				attributes: {
+					target: '_blank',
+					rel: 'noopener noreferrer'
+				}
+			},
+			{
+				mode: 'manual',
+				defaultValue: false,
+				label: 'NoFollow',
+				attributes: {
+					rel: 'nofollow'
+				}
 			}
 		},
 		{
@@ -197,10 +220,10 @@ BalloonEditor.defaultConfig = {
 	},
 	htmlEmbed: {
 		showPreviews: false,
-		sanitizeHtml( inputHtml ) {
+		sanitizeHtml(inputHtml) {
 			// Strip unsafe elements and attributes, e.g.:
 			// the `<script>` elements and `on*` attributes.
-			const outputHtml = sanitize( inputHtml );
+			const outputHtml = sanitize(inputHtml);
 
 			return {
 				html: outputHtml
@@ -225,13 +248,15 @@ BalloonEditor.defaultConfig = {
 		}
 	},
 	mediaEmbed: {
-		extraProviders: [ {
-			name: 'tiktok',
-			url: /^https?:\/\/www.?tiktok\.com\/(@.*)\/video\/([0-9]*)\/?/,
-			html: match => {
-				return `<blockquote class="tiktok-embed" cite="${ match[ 0 ] }" data-video-id="${ match[ 2 ] }" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="${ match[ 1 ] }" href="https://www.tiktok.com/${ match[ 1 ] }">${ match[ 1 ] }</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>`;
+		extraProviders: [
+			{
+				name: 'tiktok',
+				url: /^https?:\/\/www.?tiktok\.com\/(@.*)\/video\/([0-9]*)\/?/,
+				html: (match) => {
+					return `<blockquote class="tiktok-embed" cite="${match[0]}" data-video-id="${match[2]}" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="${match[1]}" href="https://www.tiktok.com/${match[1]}">${match[1]}</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>`;
+				}
 			}
-		} ]
+		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'vi'

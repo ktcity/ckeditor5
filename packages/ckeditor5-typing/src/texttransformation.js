@@ -19,11 +19,11 @@ const TRANSFORMATIONS = {
 	trademark: { from: '(tm)', to: '™' },
 
 	// Mathematical:
-	oneHalf: { from: '1/2', to: '½' },
-	oneThird: { from: '1/3', to: '⅓' },
-	twoThirds: { from: '2/3', to: '⅔' },
-	oneForth: { from: '1/4', to: '¼' },
-	threeQuarters: { from: '3/4', to: '¾' },
+	// oneHalf: { from: '1/2', to: '½' },
+	// oneThird: { from: '1/3', to: '⅓' },
+	// twoThirds: { from: '2/3', to: '⅔' },
+	// oneForth: { from: '1/4', to: '¼' },
+	// threeQuarters: { from: '3/4', to: '¾' },
 	lessThanOrEqual: { from: '<=', to: '≤' },
 	greaterThanOrEqual: { from: '>=', to: '≥' },
 	notEqual: { from: '!=', to: '≠' },
