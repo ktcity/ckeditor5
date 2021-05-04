@@ -3,11 +3,6 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-/**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
-
 import '../theme/theme.css';
 
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
@@ -15,6 +10,7 @@ import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
 // The editor creator to use.
 import BalloonEditorBase from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
+import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import BlockToolbar from '@ckeditor/ckeditor5-ui/src/toolbar/block/blocktoolbar';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
@@ -54,8 +50,86 @@ import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
 import sanitize from 'sanitize-html';
+// eslint-disable-next-line ckeditor5-rules/no-relative-imports
+// import Emoji from '../../ckeditor5-emoji/src/emoji';
+// eslint-disable-next-line ckeditor5-rules/no-relative-imports
+// import InsertTOC from '../../ckeditor5-toc/src/toc';
 
-export default class BalloonEditor extends BalloonEditorBase {}
+// export default
+
+// export default
+class ClassicEditor extends ClassicEditorBase {}
+
+// Plugins to include in the build.
+ClassicEditor.builtinPlugins = [
+	Essentials,
+	Autoformat,
+	Bold,
+	Italic,
+	BlockQuote,
+	CKFinder,
+	Heading,
+	HeadingButtonsUI,
+	Indent,
+	Link,
+	List,
+	MediaEmbed,
+	Paragraph,
+	ParagraphButtonUI,
+	PasteFromOffice,
+	Table,
+	TableToolbar,
+	TextTransformation
+	// LetterCase,
+	// Underline,
+	// Mention
+];
+
+// Editor configuration.
+ClassicEditor.defaultConfig = {
+	toolbar: {
+		items: [
+			'bold',
+			'italic',
+			'underline',
+			'paragraph',
+			'heading3',
+			'bulletedList',
+			'numberedList'
+		]
+	},
+	heading: {
+		options: [
+			{
+				model: 'paragraph',
+				title: 'Paragraph',
+				class: 'ck-heading_paragraph'
+			},
+			{
+				model: 'heading2',
+				view: 'h2',
+				title: 'Heading 2',
+				class: 'ck-heading_heading2'
+			},
+			{
+				model: 'heading3',
+				view: 'h3',
+				title: 'Heading 3',
+				class: 'ck-heading_heading3'
+			},
+			{
+				model: 'heading4',
+				view: 'h4',
+				title: 'Heading 4',
+				class: 'ck-heading_heading4'
+			}
+		]
+	},
+	// This value must be kept in sync with the language defined in webpack.config.js.
+	language: 'en'
+};
+
+class BalloonEditor extends BalloonEditorBase {}
 
 // Plugins to include in the build.
 BalloonEditor.builtinPlugins = [
@@ -100,6 +174,8 @@ BalloonEditor.builtinPlugins = [
 	TableCellProperties,
 	HtmlEmbed,
 	Mention
+	// Emoji,
+	// InsertTOC
 ];
 
 // Editor configuration.
@@ -119,8 +195,14 @@ BalloonEditor.defaultConfig = {
 		'blockQuote',
 		'mediaEmbed',
 		'|',
+<<<<<<< HEAD
 		'undo',
 		'redo'
+=======
+		'specialCharacters',
+		'htmlEmbed'
+		// 'emoji',
+>>>>>>> e1f9f91756 (update rebase)
 	],
 	heading: {
 		options: [
@@ -173,12 +255,7 @@ BalloonEditor.defaultConfig = {
 			'|',
 			'imageTextAlternative'
 		],
-		styles: [
-			'full',
-			'alignLeft',
-			'wide',
-			'fullOver'
-		]
+		styles: ['full', 'alignLeft', 'wide', 'fullOver']
 	},
 	link: {
 		protocol: 'http://',
@@ -188,8 +265,7 @@ BalloonEditor.defaultConfig = {
 				label: 'Open in a new tab',
 				defaultValue: true,
 				attributes: {
-					target: '_blank',
-					rel: 'noopener noreferrer'
+					target: '_blank'
 				}
 			},
 			{
@@ -197,7 +273,7 @@ BalloonEditor.defaultConfig = {
 				defaultValue: false,
 				label: 'NoFollow',
 				attributes: {
-					rel: 'nofollow'
+					rel: 'nofollow noopener noreferrer'
 				}
 			}
 		},
@@ -227,7 +303,7 @@ BalloonEditor.defaultConfig = {
 		openerMethod: 'popup'
 	},
 	htmlEmbed: {
-		showPreviews: false,
+		showPreviews: true,
 		sanitizeHtml(inputHtml) {
 			// Strip unsafe elements and attributes, e.g.:
 			// the `<script>` elements and `on*` attributes.
@@ -269,3 +345,4 @@ BalloonEditor.defaultConfig = {
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'vi'
 };
+export default { BalloonEditor, ClassicEditor };
